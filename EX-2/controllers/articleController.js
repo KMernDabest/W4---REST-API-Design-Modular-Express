@@ -34,8 +34,12 @@ export const createArticle = (req, res) => {
 export const updateArticle = (req, res) => {
     req.article.title = req.body.title || req.article.title;
     req.article.content = req.body.content || req.article.content;
-    req.article.journalistId = req.body.journalistId || req.article.journalistId;
-    req.article.categoryId = req.body.categoryId || req.article.categoryId;
+    req.article.journalistId = req.body.journalistId !== undefined
+        ? parseInt(req.body.journalistId)
+        : req.article.journalistId;
+    req.article.categoryId = req.body.categoryId !== undefined
+        ? parseInt(req.body.categoryId)
+        : req.article.categoryId;
     res.json(req.article);
 };
 
